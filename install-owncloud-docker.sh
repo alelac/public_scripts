@@ -245,3 +245,7 @@ EOF
 
 becho "Spinning up containers..."
 sudo docker compose up -d
+
+gecho "Finished!"
+gecho "You can find the docker-compose and env files in ${DIR_NAME}"
+echo ""
