@@ -29,8 +29,8 @@ gecho() {
 
 # Define the function
 confirm_or_exit() {
-    read -p "Do you want to continue? (y/N): " response
-    # If the response is NOT y or Y, exit immediately
+    # Force read to look at the terminal keyboard
+    read -p "Do you want to continue? (y/N): " response < /dev/tty
     if [[ ! "$response" =~ ^[Yy]$ ]]; then
         recho "Exiting script."
         exit 1
@@ -40,13 +40,14 @@ confirm_or_exit() {
 
 get_secure_password() {
     local prompt_msg="$1"
-    local -n target_var="$2" # Safe variable reference, no eval needed
+    local -n target_var="$2"
     local passwd1 passwd2
     
     while true; do
-        read -sp "$prompt_msg: " passwd1
+        # Add < /dev/tty to both read commands here
+        read -sp "$prompt_msg: " passwd1 < /dev/tty
         echo ""
-        read -sp "Confirm password: " passwd2
+        read -sp "Confirm password: " passwd2 < /dev/tty
         echo ""
         
         if [ "$passwd1" = "$passwd2" ] && [ -n "$passwd1" ]; then
@@ -143,8 +144,8 @@ cd "$DIR_NAME" || { recho "Failed to enter directory $DIR_NAME"; exit 1; }
 
 
 # User inputs for environment file
-read -p "Enter OwnCloud Domain/FQDN (e.g., owncloud.local): " FQDN
-read -p "Enter Admin Username [admin]: " OCADMIN
+read -p "Enter OwnCloud Domain/FQDN (e.g., owncloud.local): " FQDN < /dev/tty
+read -p "Enter Admin Username [admin]: " OCADMIN < /dev/tty
 OCADMIN=${OCADMIN:-admin}
 get_secure_password "Enter Admin Password" OCPASSWD
 get_secure_password "Enter Database User Password" OCDBPWD
