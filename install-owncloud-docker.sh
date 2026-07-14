@@ -131,6 +131,7 @@ fi
 # (Matches any file/folder inside, excluding '.' and '..')
 if [ "$(ls -A "$DIR_NAME" 2>/dev/null)" ]; then
     recho "WARNING: Directory '$DIR_NAME' already exists and is NOT empty."
+    # Explicitly redirect /dev/tty for THIS read command too
     read -p "Do you want to proceed and potentially overwrite files? (y/N): " proceed < /dev/tty
     if [[ ! "$proceed" =~ ^[Yy]$ ]]; then
         yecho "Aborting script to protect existing files."
