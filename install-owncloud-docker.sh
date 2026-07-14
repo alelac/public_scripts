@@ -105,8 +105,9 @@ becho "Fetching the latest stable OwnCloud version..."
 
 # Look up the latest version string
 LATEST_VERSION=$(curl -s "https://hub.docker.com/v2/repositories/owncloud/server/tags?page_size=100" | \
-  jq -r '.results[].name | select(test("^[0-9]+\\.[0-9]+\\.[0-9]+$"))' | \
-  sort -V | tail -n 1)
+  jq -r '.results[].name' | \
+  grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | \
+  sort -V | tail -n 1 || true)
 
 if [ -z "$LATEST_VERSION" ]; then
     LATEST_VERSION="10.16.3"
