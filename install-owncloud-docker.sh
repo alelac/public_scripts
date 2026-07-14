@@ -137,7 +137,7 @@ if [ "$(ls -A "$DIR_NAME" 2>/dev/null)" ]; then
         exit 1
     fi
 else
-    echo "Directory '$DIR_NAME' is empty and ready to use."
+    gecho "Directory '$DIR_NAME' is empty and ready to use."
 fi
 # 3. Safely enter the directory
 cd "$DIR_NAME" || { recho "Failed to enter directory $DIR_NAME"; exit 1; }
@@ -148,7 +148,7 @@ read -p "Enter OwnCloud Domain/FQDN (e.g., owncloud.local): " FQDN < /dev/tty
 read -p "Enter Admin Username [admin]: " OCADMIN < /dev/tty
 OCADMIN=${OCADMIN:-admin}
 get_secure_password "Enter Admin Password" OCPASSWD
-get_secure_password "Enter Database User Password" OCDBPWD
+get_secure_password "Enter Owncloud Database User Password" OCDBPWD
 get_secure_password "Enter MySQL Root Password" ROOTDBPWD
 
 
