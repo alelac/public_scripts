@@ -65,7 +65,7 @@ get_secure_password() {
 
 becho "==========================================="
 becho " OwnCloud Docker Compose Deployment Script "
-becho " by Alexander Läck 2026-07-14              "
+becho " by alelac 2026-07-14                      "
 becho "==========================================="
 echo ""
 
