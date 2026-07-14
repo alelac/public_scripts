@@ -168,6 +168,8 @@ OC_DB_PASSWORD=${OCDBPWD}
 MYSQL_ROOT_PWD=${ROOTDBPWD}
 EOF
 
+# Secure the .env file so regular users cannot read DB passwords
+sudo chmod 600 .env
 
 becho "Creating docker-compose.yml..."
 cat << 'EOF' > docker-compose.yml
