@@ -17,6 +17,6 @@
 > Asks for admin account and password  
 > Asks for owncloud database password  
 > Asks for MySQL (mariadb) root password  
-> Configures owncloud to store user files in /mnt/data  
+> Configures owncloud to store user files in /mnt/owncloud-data  
 > 
 > `curl -sSL https://raw.githubusercontent.com/alelac/public_scripts/main/install-owncloud-docker.sh -o deployowncloud.sh && sudo bash deployowncloud.sh; rm deployowncloud.sh`  
