@@ -210,7 +210,7 @@ services:
       timeout: 10s
       retries: 5
     volumes:
-      - files:/mnt/data
+      - files:/mnt/owncloud-data
 
   mariadb:
     image: mariadb:10.11
