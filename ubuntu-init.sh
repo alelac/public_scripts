@@ -40,8 +40,8 @@ yecho "--> Removing unnecessary packages..."
 apt-get autoremove -y
 
 # 2. Install requested utilities
-yecho "--> Installing ssh, neofetch, and vim..."
-apt-get install -y ssh neofetch vim
+yecho "--> Installing ssh, neofetch, net-tools, and vim..."
+apt-get install -y ssh neofetch net-tools vim
 
 # 3. Define target .bashrc files
 BASHRC_FILES=("/root/.bashrc" "/etc/skel/.bashrc")
