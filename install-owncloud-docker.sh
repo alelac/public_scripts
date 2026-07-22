@@ -126,6 +126,11 @@ DIR_NAME="/opt/docker/owncloud"
 if [ ! -d "$DIR_NAME" ]; then
     gecho "Directory '$DIR_NAME' does not exist. Creating it..."
     mkdir -p "$DIR_NAME"
+    gecho "Creating directories for custom_apps, theme-mycompany and z-custom.config.php file"
+    mkdir -p "$DIR_NAME/custom_apps"
+    mkdir -p "$DIR_NAME/theme-mycompany"
+    mkdir -p "$DIR_NAME/config"
+    touch "$DIR_NAME/config/z-custom.config.php"
 fi
 # 2. Check if the directory is NOT empty
 # (Matches any file/folder inside, excluding '.' and '..')
@@ -210,8 +215,11 @@ services:
       timeout: 10s
       retries: 5
     volumes:
-      - files:/mnt/owncloud-data
-
+      - files:/mnt/owncloud-data    # Persists user files
+      - ./custom_apps:/var/www/owncloud/custom           # Persists installed apps (e.g. OpenID Connect)
+      - ./theme-mycompany:/var/www/owncloud/custom/theme-mycompany # Mounts your custom theme
+      - ./config/z-custom.config.php:/var/www/owncloud/config/z-custom.config.php # Custom config overrides
+      
   mariadb:
     image: mariadb:10.11
     container_name: owncloud_mariadb
