@@ -126,11 +126,6 @@ DIR_NAME="/opt/docker/owncloud"
 if [ ! -d "$DIR_NAME" ]; then
     gecho "Directory '$DIR_NAME' does not exist. Creating it..."
     mkdir -p "$DIR_NAME"
-    gecho "Creating directories for custom_apps, theme-mycompany and z-custom.config.php file"
-    mkdir -p "$DIR_NAME/custom_apps"
-    mkdir -p "$DIR_NAME/theme-mycompany"
-    mkdir -p "$DIR_NAME/config"
-    touch "$DIR_NAME/config/z-custom.config.php"
 fi
 # 2. Check if the directory is NOT empty
 # (Matches any file/folder inside, excluding '.' and '..')
@@ -144,6 +139,11 @@ if [ "$(ls -A "$DIR_NAME" 2>/dev/null)" ]; then
     fi
 else
     gecho "Directory '$DIR_NAME' is empty and ready to use."
+    gecho "Creating directories for custom_apps, theme-mycompany and z-custom.config.php file"
+    mkdir -p "$DIR_NAME/custom_apps"
+    mkdir -p "$DIR_NAME/theme-mycompany"
+    mkdir -p "$DIR_NAME/config"
+    touch "$DIR_NAME/config/z-custom.config.php"
 fi
 # 3. Safely enter the directory
 cd "$DIR_NAME" || { recho "Failed to enter directory $DIR_NAME"; exit 1; }
