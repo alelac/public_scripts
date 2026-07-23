@@ -94,19 +94,15 @@ fi
 # Get the current hostname to display as the default
 CURRENT_HOSTNAME=$(hostname)
 
-# Prompt the user for a new hostname
-read -p "Enter new hostname (press Enter to keep '$CURRENT_HOSTNAME'): " NEW_HOSTNAME
+CURRENT_HOSTNAME=$(hostname)
 
-# Check if the user entered anything
+# Read directly from the controlling terminal (/dev/tty)
+read -p "Enter new hostname (press Enter to keep '$CURRENT_HOSTNAME'): " NEW_HOSTNAME < /dev/tty
+
 if [ -n "$NEW_HOSTNAME" ]; then
     echo "Updating hostname to $NEW_HOSTNAME..."
-    
-    # 1. Update the system hostname via hostnamectl
     sudo hostnamectl set-hostname "$NEW_HOSTNAME"
-    
-    # 2. Update /etc/hosts to keep local loopback resolution clean and avoid sudo warnings
     sudo sed -i "s/127.0.1.1.*/127.0.1.1\t$NEW_HOSTNAME/" /etc/hosts
-    
     echo "Hostname successfully changed to: $NEW_HOSTNAME"
 else
     echo "Keeping current hostname ($CURRENT_HOSTNAME)."
