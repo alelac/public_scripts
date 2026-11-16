@@ -41,7 +41,7 @@ apt-get autoremove -y
 
 # 2. Install requested utilities
 yecho "--> Installing ssh, fastfetch, net-tools, and vim..."
-apt-get install -y ssh neofetch net-tools vim
+apt-get install -y ssh fastfetch net-tools vim
 
 # 3. Define target .bashrc files
 BASHRC_FILES=("/root/.bashrc" "/etc/skel/.bashrc")
